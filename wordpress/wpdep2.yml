@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: wp-dp
+spec:
+   selector:
+       matchLabels:
+         app: wp
+   replicas: 2
+   template:
+       metadata:
+           name: wp-pod
+           labels:
+              app: wp
+       spec:
+         containers:
+              - name: wordpress
+                image: wordpress
+                env:
+                   - name: WORDPRESS_DB_PASSWORD
+                     valueFrom:
+                         secretKeyRef:
+                             name: mysec
+                             key: WORDPRESS_DB_PASSWORD
+                   - name: WORDPRESS_DB_USER
+                     valueFrom:
+                         secretKeyRef:
+                              name: mysec
+                              key: WORDPRESS_DB_USER
+                   - name: WORDPRESS_DB_HOST
+                     valueFrom:
+                          secretKeyRef:
+                              name: mysec
+                              key: WORDPRESS_DB_HOST
+                   - name: WORDPRESS_DB_NAME
+                     valueFrom:
+                           secretKeyRef:
+                               name: mysec
+                               key: WORDPRESS_DB_NAME             

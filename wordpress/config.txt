@@ -1,0 +1,4 @@
+MYSQL_DATABASE=sourabh
+MYSQL_USER=sourabh
+MYSQL_PASSWORD=redhat
+

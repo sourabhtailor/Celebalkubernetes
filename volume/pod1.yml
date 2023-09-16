@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mypod
+spec:
+  containers:
+    - name: mycontainer
+      image: centos/httpd
+      volumeMounts:
+        - name: myvolume
+          mountPath: /var/www/html
+  volumes:
+    - name: myvolume
+      persistentVolumeClaim:
+        claimName: mypvc
+

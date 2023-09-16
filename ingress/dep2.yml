@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: ingress2
+spec:
+   selector:
+       matchLabels:
+            app: v1
+   replicas: 2
+   template:
+      metadata:
+           name: ingress-pod
+           labels:
+              app: v1
+      spec:
+         containers:
+              - name: container
+                image: sourabhtailor/httpd
+

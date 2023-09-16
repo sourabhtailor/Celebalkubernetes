@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+   name: mysql-dp
+spec:
+    selector:
+        matchLabels:
+               app: mysql
+    replicas: 2
+    template:
+         metadata:
+              name: mysql-pod
+              labels:
+                  app: mysql
+         spec:
+             containers:
+               - name: mysql
+                 image: mysql
+                 env:
+                    - name: MYSQL_ROOT_PASSWORD
+                      valueFrom:
+                         secretKeyRef:
+                           name: mysec
+                           key: WORDPRESS_DB_PASSWORD
+                 envFrom:
+                     - configMapRef:
+                              name: myconfig             
